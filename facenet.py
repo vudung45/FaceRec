@@ -79,17 +79,17 @@ def cameraDetection():
 				faces = face_detect(black_white,1);
 				if len(faces) > 0:
 					for region in faces: # x - y width heighh
-							landmarks = face_marker(black_white,region);
-							face_pos = getFacePosition(landmarks);
-							real_region = dlib.rectangle(max(region.left() * scale_factor-32,0),max(region.top() * scale_factor-32,0),min(region.right() * scale_factor+32,len(img[1])),min(region.bottom() * scale_factor+32,len(img)));
-							crop_phase0 = prewhiten(cropFace(img,landmarks,scale_factor)); #preprocess step 1
-							aligned_face, angle = alignFace(landmarks,crop_phase0) #align face using eye angle
-							aligned_face = cv2.resize(aligned_face,(180,180));
-							aligned_face = aligned_face[10:len(aligned_face)-10,10:len(aligned_face[1])-10]; #margin 32 to remove black bars after rotating
-							cv2.imshow("aligned",aligned_face)
-							features_128D = np.asarray(session.run(get_128D, feed_dict={x1 : [aligned_face]}));	
-							person_name, prob = findPerson(features_128D,face_pos)[0]
-							face_info.append(FACE(real_region,person_name,prob,angle,face_pos))
+						landmarks = face_marker(black_white,region);
+						face_pos = getFacePosition(landmarks);
+						real_region = dlib.rectangle(max(region.left() * scale_factor-32,0),max(region.top() * scale_factor-32,0),min(region.right() * scale_factor+32,len(img[1])),min(region.bottom() * scale_factor+32,len(img)));
+						crop_phase0 = prewhiten(cropFace(img,landmarks,scale_factor)); #preprocess step 1
+						aligned_face, angle = alignFace(landmarks,crop_phase0) #align face using eye angle
+						aligned_face = cv2.resize(aligned_face,(180,180));
+						aligned_face = aligned_face[10:len(aligned_face)-10,10:len(aligned_face[1])-10]; #margin 32 to remove black bars after rotating
+						cv2.imshow("aligned",aligned_face)
+						features_128D = np.asarray(session.run(get_128D, feed_dict={x1 : [aligned_face]}));	
+						person_name, prob = findPerson(features_128D,face_pos)[0]
+						face_info.append(FACE(real_region,person_name,prob,angle,face_pos))
 
 			for info in face_info:
 				cv2.rectangle(img,(info.region.left(),info.region.top()),(info.region.right(),info.region.bottom()),(255,0,0),3);
@@ -240,5 +240,3 @@ def test_data_set():
 #preprocessData();
 cameraDetection(); # test trained data set with live camera 
 #create_manual_data(); # to create manual data
-
-

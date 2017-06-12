@@ -2,8 +2,11 @@
 
 Dependencies:
     dlib
+
     opencv3
+
     tensorflow
+
     PILLOW
 
 

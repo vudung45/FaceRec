@@ -1,4 +1,6 @@
 # FaceRec
+Somewhat a simple working facial recognition program.
+
 
 Dependencies:
 

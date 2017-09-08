@@ -49,7 +49,7 @@ More info on MTCNN Face Detection: https://kpzhang93.github.io/MTCNN_face_detect
 
 Both of these models are run simultaneouslyx
 
-###Framework and Libs:
+### Framework and Libs:
 
 Neural Network framework/library: Tensorflow.
 

@@ -1,5 +1,15 @@
 # FaceRec
-Somewhat a simple working facial recognition program.
+A simple working facial recognition program.
+
+
+## Installation:
+    1. Install the dependencies
+
+    2. Download the pretrained models here: https://drive.google.com/file/d/0Bx4sNrhhaBr3TDRMMUN3aGtHZzg/view?usp=sharing
+    
+        Then extract those files into models
+
+    3. Run main.py
 
 ## Requirements:
     Python3 (3.5 ++ is recommended)
@@ -13,13 +23,15 @@ Somewhat a simple working facial recognition program.
 
 ## Howto:
     `python3 main.py` to run the program
+    `python3 main.py --mode "input"` to add new user
 
 ### Flags:
    `--mode "input"` to add new user into the data set
     
 
 
-A Convolution Neural Network Implementation for Facial Recogition
+
+Facial Recogition Implementation of Convolutional Neural Network
 
 Architecture: Inception Resnet V1 
 
@@ -31,3 +43,6 @@ Live demo: https://www.youtube.com/watch?v=6CeCheBN0Mg
 
 
 @Author: David Vu
+
+## Credits:
+    -  Pretrained models from: https://github.com/davidsandberg/facenet

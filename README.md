@@ -51,9 +51,9 @@ Both of these models are run simultaneouslyx
 
 ### Framework and Libs:
 
-Neural Network framework/library: Tensorflow.
+Tensorflow: Framework
 
-I also used Opencv for some image processing processes.
+OpenCV: Image processing
 
 
 ### Demos:

@@ -18,6 +18,8 @@ A simple working facial recognition program.
 
     opencv3
 
+    numpy
+
     tensorflow
 
 

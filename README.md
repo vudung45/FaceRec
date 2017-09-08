@@ -51,9 +51,9 @@ Both of these models are run simultaneouslyx
 
 ### Framework and Libs:
 
-Tensorflow: Framework
+Tensorflow: The infamous Google's Deep Learning Framework
 
-OpenCV: Image processing
+OpenCV: Image processing (VideoCapture, resizing,..)
 
 
 ### Demos:

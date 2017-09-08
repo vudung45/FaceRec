@@ -33,7 +33,11 @@ A simple working facial recognition program.
 
 
 ## General Information:
-Project: Facial Recogition in Python
+Project: Facial Recogition
+
+This is a simple minified version of a bigger project I was working on this summer.
+
+### Info on the models I used:
 
 Recognition Model: Inception Resnet V1 
 
@@ -45,9 +49,14 @@ More info on MTCNN Face Detection: https://kpzhang93.github.io/MTCNN_face_detect
 
 Both of these models are run simultaneouslyx
 
+###Framework and Libs:
+
 Neural Network framework/library: Tensorflow.
 
 I also used Opencv for some image processing processes.
+
+
+###Demos:
 
 ![GIF Demo](https://media.giphy.com/media/l378mx3j8ZsWlOuze/giphy.gif)
 

@@ -1,5 +1,8 @@
 '''
 Tensorflow implementation of the mtcnn face detection algorithm
+Author: David Vu
+
+
 
 Credit: David Sandberg
 '''

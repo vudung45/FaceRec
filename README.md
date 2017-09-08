@@ -56,7 +56,7 @@ Neural Network framework/library: Tensorflow.
 I also used Opencv for some image processing processes.
 
 
-###Demos:
+### Demos:
 
 ![GIF Demo](https://media.giphy.com/media/l378mx3j8ZsWlOuze/giphy.gif)
 

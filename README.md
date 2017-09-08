@@ -3,7 +3,7 @@ A simple working facial recognition program.
 
 
 ## Installation:
-    1. Install dependencies
+    1. Install the dependencies
 
     2. Download the pretrained models here: https://drive.google.com/file/d/0Bx4sNrhhaBr3TDRMMUN3aGtHZzg/view?usp=sharing
     
@@ -25,17 +25,29 @@ A simple working facial recognition program.
 
 ## Howto:
     `python3 main.py` to run the program
-    `python3 main.py --mode "input"` to add new user. Start turning left, right, up, down after inputting a new name. Turn slowly to avoid blurred images
+    `python3 main.py --mode "input"` to add new user. Start turning left, right, up, down after inputting the new name. Turn slowly to avoid blurred images
 
 ### Flags:
    `--mode "input"` to add new user into the data set
     
 
-## General information:
 
-Architecture: Inception Resnet V1 
+
+Project: Facial Recogition in Python
+
+Recognition Model: Inception Resnet V1 
 
 More information on the model: https://arxiv.org/abs/1602.07261
+
+Face detection method: MTCNN
+
+More info on MTCNN Face Detection: https://kpzhang93.github.io/MTCNN_face_detection_alignment/
+
+Both of these models are run simultaneouslyx
+
+Neural Network framework/library: Tensorflow.
+
+I also used Opencv for some image processing processes.
 
 ![GIF Demo](https://media.giphy.com/media/l378mx3j8ZsWlOuze/giphy.gif)
 

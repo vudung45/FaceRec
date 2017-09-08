@@ -23,7 +23,7 @@ A simple working facial recognition program.
 
 ## Howto:
     `python3 main.py` to run the program
-    `python3 main.py --mode "input"` to add new user
+    `python3 main.py --mode "input"` to add new user. Start turning left, right, up, down after inputting the new name. Turn slowly to avoid blurred images
 
 ### Flags:
    `--mode "input"` to add new user into the data set

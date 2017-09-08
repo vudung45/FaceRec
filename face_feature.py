@@ -8,14 +8,14 @@ from architecture import inception_resnet_v1 as resnet
 import numpy as np
 
 class FaceFeature(object):
-    def __init__(self, face_rec_sess, model_path = 'models/model-20170512-110547.ckpt-250000'):
+    def __init__(self, face_rec_graph, model_path = 'models/model-20170512-110547.ckpt-250000'):
         '''
 
         :param face_rec_sess: FaceRecSession object
         :param model_path:
         '''
         print("Loading model...")
-        with face_rec_sess.session_graph.as_default():
+        with face_rec_graph.graph.as_default():
             self.sess = tf.Session()
             self.x = tf.placeholder('float', [None,160,160,3]); #default input for the NN is 160x160x3
             self.embeddings = tf.nn.l2_normalize(

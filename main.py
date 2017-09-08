@@ -13,7 +13,7 @@ import cv2
 from align_custom import AlignCustom
 from face_feature import FaceFeature
 from mtcnn_detect import MTCNNDetect
-from tf_session import FaceRecSession
+from tf_graph import FaceRecGraph
 import argparse
 import sys
 import json
@@ -112,8 +112,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--mode", type=str, help="Run camera recognition", default="camera")
     args = parser.parse_args(sys.argv[1:]);
-    FRSession = FaceRecSession();
+    FRGraph = FaceRecGraph();
     aligner = AlignCustom();
-    extract_feature = FaceFeature(FRSession)
-    face_detect = MTCNNDetect(FRSession, scale_factor=2);
+    extract_feature = FaceFeature(FRGraph)
+    face_detect = MTCNNDetect(FRGraph, scale_factor=2); #scale_factor, rescales image for faster detection
     main(args);

@@ -39,7 +39,9 @@ This is a simple minified version of a bigger project I was working on this summ
 
 ### Info on the models I used:
 
-Recognition Model: Inception Resnet V1 
+Facial Recognition Architecture: Facenet Inception Resnet V1 
+
+_Pretrained model is provided in Davidsandberg repo_
 
 More information on the model: https://arxiv.org/abs/1602.07261
 

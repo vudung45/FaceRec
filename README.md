@@ -31,9 +31,7 @@ A simple working facial recognition program.
    `--mode "input"` to add new user into the data set
     
 
-
-
-Facial Recogition Implementation of Convolutional Neural Network
+## General information:
 
 Architecture: Inception Resnet V1 
 

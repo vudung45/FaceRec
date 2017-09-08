@@ -32,7 +32,7 @@ A simple working facial recognition program.
     
 
 
-
+## General Information:
 Project: Facial Recogition in Python
 
 Recognition Model: Inception Resnet V1 

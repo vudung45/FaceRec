@@ -88,7 +88,17 @@ def findPeople(features_arr, positions, thres = 0.6, percent_thres = 70):
         returnRes.append((result,percentage))
     return returnRes
 
-
+'''
+Description:
+User input his/her name or ID -> Images from Video Capture -> detect the face -> crop the face and align it 
+    -> face is then categorized in 3 types: Center, Left, Right 
+    -> Extract 128D vectors( face features)
+    -> Append each newly extracted face 128D vector to its corresponding position type (Center, Left, Right)
+    -> Press Q to stop capturing
+    -> Find the center ( the mean) of those 128D vectors in each category. ( np.mean(...) )
+    -> Save
+    
+'''
 def create_manual_data():
     vs = cv2.VideoCapture(0); #get input from webcam
     print("Please input new user ID:")

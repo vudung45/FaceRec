@@ -7,6 +7,7 @@ main.py
 
 To input new user:
 main.py --mode "input"
+
 '''
 
 import cv2
@@ -27,7 +28,16 @@ def main(args):
         create_manual_data();
     else:
         raise ValueError("Unimplemented mode")
-
+'''
+Description:
+Images from Video Capture -> detect faces' regions -> crop those faces and align them 
+    -> each cropped face is categorized in 3 types: Center, Left, Right 
+    -> Extract 128D vectors( face features)
+    -> Search for matching subjects in the dataset based on the types of face positions. 
+    -> The preexisitng face 128D vector with the shortest distance to the 128D vector of the face on screen is most likely a match
+    (Distance threshold is 0.6, percentage threshold is 70%)
+    
+'''
 def camera_recog():
     print("[INFO] camera sensor warming up...")
     vs = cv2.VideoCapture(0); #get input from webcam

@@ -61,7 +61,18 @@ def camera_recog():
         key = cv2.waitKey(1) & 0xFF
         if key == ord("q"):
             break
-
+'''
+facerec_128D.txt Data Structure:
+{
+"Person ID": {
+    "Center": [[128D vector]],
+    "Left": [[128D vector]],
+    "Right": [[128D Vector]]
+    }
+}
+This function basically does a simple linear search for 
+^the 128D vector with the min distance to the 128D vector of the face on screen
+'''
 def findPeople(features_arr, positions, thres = 0.6, percent_thres = 70):
     '''
     :param features_arr: a list of 128d Features of all faces on screen

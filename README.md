@@ -27,6 +27,11 @@ A simple working facial recognition program.
     `python3 main.py` to run the program
     `python3 main.py --mode "input"` to add new user. Start turning left, right, up, down after inputting the new name. Turn slowly to avoid blurred images
 
+    To achieve best accuracy, please try to mimick what I did here in this gif:
+    
+    ![GIF Demo](https://media.giphy.com/media/3o7aD7CZ6C3RLCvLgs/giphy.gif)
+
+        
 ### Flags:
    `--mode "input"` to add new user into the data set
     

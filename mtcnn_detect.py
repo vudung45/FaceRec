@@ -1,5 +1,7 @@
 '''
 Tensorflow implementation of the mtcnn face detection algorithm
+
+Credit: DavidSandBerg for implementing this method on tensorflow
 '''
 from six import string_types, iteritems
 import numpy as np

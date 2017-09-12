@@ -66,7 +66,7 @@ OpenCV: Image processing (VideoCapture, resizing,..)
 ## Suggestions for Improvement:
 To keep this repo as simple as possible, I will probably have this "plug-in" in a seperate repo:
 
-Given the constrain of the facenet model's accuracy, there are many ways you can improve the accuracy in real world application. One of my suggestion would be to create a tracker for each detected face on screen, then run recognition for each of them in real time. Then, decide who is in each tracker after some number of frames (3 - 10 frames, depending on how fast your machine is). Keep doing the same thing until the tracker disappears or loses track. Your result can look somewhat like this:
+Given the constrain of the facenet model's accuracy, there are many ways you can improveaccuracy in real world application. One of my suggestion would be to create a tracker for each detected face on screen, then run recognition for each of them in real time. Then, decide who is in each tracker after some number of frames (3 - 10 frames, depending on how fast your machine is). Keep doing the same thing until the tracker disappears or loses track. Your result can look somewhat like this:
 
 `{"Unknown" :3, "PersonA": 1, "PersonB": 20}` ---> This tracker is tracking PersonB
 

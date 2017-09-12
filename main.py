@@ -7,6 +7,7 @@ main.py
 
 To input new user:
 main.py --mode "input"
+
 '''
 
 import cv2
@@ -27,7 +28,16 @@ def main(args):
         create_manual_data();
     else:
         raise ValueError("Unimplemented mode")
-
+'''
+Description:
+Images from Video Capture -> detect faces' regions -> crop those faces and align them 
+    -> each cropped face is categorized in 3 types: Center, Left, Right 
+    -> Extract 128D vectors( face features)
+    -> Search for matching subjects in the dataset based on the types of face positions. 
+    -> The preexisitng face 128D vector with the shortest distance to the 128D vector of the face on screen is most likely a match
+    (Distance threshold is 0.6, percentage threshold is 70%)
+    
+'''
 def camera_recog():
     print("[INFO] camera sensor warming up...")
     vs = cv2.VideoCapture(0); #get input from webcam
@@ -51,7 +61,18 @@ def camera_recog():
         key = cv2.waitKey(1) & 0xFF
         if key == ord("q"):
             break
-
+'''
+facerec_128D.txt Data Structure:
+{
+"Person ID": {
+    "Center": [[128D vector]],
+    "Left": [[128D vector]],
+    "Right": [[128D Vector]]
+    }
+}
+This function basically does a simple linear search for 
+^the 128D vector with the min distance to the 128D vector of the face on screen
+'''
 def findPeople(features_arr, positions, thres = 0.6, percent_thres = 70):
     '''
     :param features_arr: a list of 128d Features of all faces on screen
@@ -78,7 +99,17 @@ def findPeople(features_arr, positions, thres = 0.6, percent_thres = 70):
         returnRes.append((result,percentage))
     return returnRes
 
-
+'''
+Description:
+User input his/her name or ID -> Images from Video Capture -> detect the face -> crop the face and align it 
+    -> face is then categorized in 3 types: Center, Left, Right 
+    -> Extract 128D vectors( face features)
+    -> Append each newly extracted face 128D vector to its corresponding position type (Center, Left, Right)
+    -> Press Q to stop capturing
+    -> Find the center ( the mean) of those 128D vectors in each category. ( np.mean(...) )
+    -> Save
+    
+'''
 def create_manual_data():
     vs = cv2.VideoCapture(0); #get input from webcam
     print("Please input new user ID:")

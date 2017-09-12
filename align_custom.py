@@ -1,9 +1,10 @@
 '''
-Implementing  Dlib Face alignment strategy
+Implement  Dlib Face alignment strategy
 
-'''
+However, this method/approach doesn't deform the original image like Dlib does.
 
-'''
+This also categorizes the face in 3 types: Center, Left, Right
+
 Align face based on facial landmarks
 '''
 import math
@@ -15,7 +16,7 @@ import numpy as np
 class AlignCustom(object):
     def __init__(self):
         pass
-
+    
     def getPos(self, points):
         if abs(points[0] - points[2]) / abs(points[1] - points[2]) > 2:
             return "Right";

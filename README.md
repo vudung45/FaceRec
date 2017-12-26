@@ -20,7 +20,7 @@ A simple working facial recognition program.
 
     numpy
 
-    tensorflow
+    tensorflow ( 1.1.0 is recommended )
 
 
 ## Howto:

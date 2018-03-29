@@ -49,8 +49,11 @@ def camera_recog():
         positions = []
         for (i, rect) in enumerate(rects):
             aligned_face, face_pos = aligner.align(160,frame,landmarks[i])
-            aligns.append(aligned_face)
-            positions.append(face_pos)
+            if len(aligned_face) == 160 && len(aligned_face[0]) == 160:
+                aligns.append(aligned_face)
+                positions.append(face_pos)
+            else: 
+                print("Align face failed") #log
         features_arr = extract_feature.get_features(aligns)
         recog_data = findPeople(features_arr,positions);
         for (i,rect) in enumerate(rects):
@@ -112,7 +115,8 @@ User input his/her name or ID -> Images from Video Capture -> detect the face ->
 '''
 def create_manual_data():
     vs = cv2.VideoCapture(0); #get input from webcam
-    print("Please input new user ID:")
+    
+                      ("Please input new user ID:")
     new_name = input(); #ez python input()
     f = open('./facerec_128D.txt','r');
     data_set = json.loads(f.read());
@@ -124,8 +128,9 @@ def create_manual_data():
         rects, landmarks = face_detect.detect_face(frame, 80);  # min face size is set to 80x80
         for (i, rect) in enumerate(rects):
             aligned_frame, pos = aligner.align(160,frame,landmarks[i]);
-            person_imgs[pos].append(aligned_frame)
-            cv2.imshow("Captured face", aligned_frame)
+            if len(aligned_frame) == 160 && len(aligned_frame[0]) == 160:
+                person_imgs[pos].append(aligned_frame)
+                cv2.imshow("Captured face", aligned_frame)
         key = cv2.waitKey(1) & 0xFF
         if key == ord("q"):
             break

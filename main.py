@@ -128,7 +128,7 @@ def create_manual_data():
         rects, landmarks = face_detect.detect_face(frame, 80);  # min face size is set to 80x80
         for (i, rect) in enumerate(rects):
             aligned_frame, pos = aligner.align(160,frame,landmarks[i]);
-            if len(aligned_frame) == 160 && len(aligned_frame[0]) == 160:
+            if len(aligned_frame) == 160 and len(aligned_frame[0]) == 160:
                 person_imgs[pos].append(aligned_frame)
                 cv2.imshow("Captured face", aligned_frame)
         key = cv2.waitKey(1) & 0xFF

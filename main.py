@@ -49,11 +49,12 @@ def camera_recog():
         positions = []
         for (i, rect) in enumerate(rects):
             aligned_face, face_pos = aligner.align(160,frame,landmarks[i])
-            if len(aligned_face) == 160 && len(aligned_face[0]) == 160:
+            if len(aligned_face) == 160 and len(aligned_face[0]) == 160:
                 aligns.append(aligned_face)
                 positions.append(face_pos)
             else: 
-                print("Align face failed") #log
+                print("Align face failed") #log        
+        if(len(aligns) > 0):
         features_arr = extract_feature.get_features(aligns)
         recog_data = findPeople(features_arr,positions);
         for (i,rect) in enumerate(rects):

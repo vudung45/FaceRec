@@ -55,11 +55,11 @@ def camera_recog():
             else: 
                 print("Align face failed") #log        
         if(len(aligns) > 0):
-        features_arr = extract_feature.get_features(aligns)
-        recog_data = findPeople(features_arr,positions);
-        for (i,rect) in enumerate(rects):
-            cv2.rectangle(frame,(rect[0],rect[1]),(rect[0] + rect[2],rect[1]+rect[3]),(255,0,0)) #draw bounding box for the face
-            cv2.putText(frame,recog_data[i][0]+" - "+str(recog_data[i][1])+"%",(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
+            features_arr = extract_feature.get_features(aligns)
+            recog_data = findPeople(features_arr,positions);
+            for (i,rect) in enumerate(rects):
+                cv2.rectangle(frame,(rect[0],rect[1]),(rect[0] + rect[2],rect[1]+rect[3]),(255,0,0)) #draw bounding box for the face
+                cv2.putText(frame,recog_data[i][0]+" - "+str(recog_data[i][1])+"%",(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
 
         cv2.imshow("Frame",frame)
         key = cv2.waitKey(1) & 0xFF

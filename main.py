@@ -48,7 +48,7 @@ def camera_recog():
         aligns = []
         positions = []
         for (i, rect) in enumerate(rects):
-            aligned_face, face_pos = aligner.align(160,frame,landmarks[i])
+            aligned_face, face_pos = aligner.align(160,frame,landmarks[:,i])
             if len(aligned_face) == 160 and len(aligned_face[0]) == 160:
                 aligns.append(aligned_face)
                 positions.append(face_pos)
@@ -56,7 +56,7 @@ def camera_recog():
                 print("Align face failed") #log        
         if(len(aligns) > 0):
             features_arr = extract_feature.get_features(aligns)
-            recog_data = findPeople(features_arr,positions);
+            recog_data = findPeople(features_arr,positions)
             for (i,rect) in enumerate(rects):
                 cv2.rectangle(frame,(rect[0],rect[1]),(rect[0] + rect[2],rect[1]+rect[3]),(255,0,0)) #draw bounding box for the face
                 cv2.putText(frame,recog_data[i][0]+" - "+str(recog_data[i][1])+"%",(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
@@ -128,7 +128,7 @@ def create_manual_data():
         _, frame = vs.read();
         rects, landmarks = face_detect.detect_face(frame, 80);  # min face size is set to 80x80
         for (i, rect) in enumerate(rects):
-            aligned_frame, pos = aligner.align(160,frame,landmarks[i]);
+            aligned_frame, pos = aligner.align(160,frame,landmarks[:,i]);
             if len(aligned_frame) == 160 and len(aligned_frame[0]) == 160:
                 person_imgs[pos].append(aligned_frame)
                 cv2.imshow("Captured face", aligned_frame)

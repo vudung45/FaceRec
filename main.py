@@ -20,6 +20,8 @@ import sys
 import json
 import numpy as np
 
+TIMEOUT = 10 #10 seconds
+
 def main(args):
     mode = args.mode
     if(mode == "camera"):
@@ -41,12 +43,14 @@ Images from Video Capture -> detect faces' regions -> crop those faces and align
 def camera_recog():
     print("[INFO] camera sensor warming up...")
     vs = cv2.VideoCapture(0); #get input from webcam
+    detect_time = time.time()
     while True:
         _,frame = vs.read();
         #u can certainly add a roi here but for the sake of a demo i'll just leave it as simple as this
         rects, landmarks = face_detect.detect_face(frame,80);#min face size is set to 80x80
         aligns = []
         positions = []
+
         for (i, rect) in enumerate(rects):
             aligned_face, face_pos = aligner.align(160,frame,landmarks[:,i])
             if len(aligned_face) == 160 and len(aligned_face[0]) == 160:
@@ -60,6 +64,7 @@ def camera_recog():
             for (i,rect) in enumerate(rects):
                 cv2.rectangle(frame,(rect[0],rect[1]),(rect[0] + rect[2],rect[1]+rect[3]),(255,0,0)) #draw bounding box for the face
                 cv2.putText(frame,recog_data[i][0]+" - "+str(recog_data[i][1])+"%",(rect[0],rect[1]),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,255),1,cv2.LINE_AA)
+
 
         cv2.imshow("Frame",frame)
         key = cv2.waitKey(1) & 0xFF
@@ -101,7 +106,7 @@ def findPeople(features_arr, positions, thres = 0.6, percent_thres = 70):
         if percentage <= percent_thres :
             result = "Unknown"
         returnRes.append((result,percentage))
-    return returnRes
+    return returnRes    
 
 '''
 Description:

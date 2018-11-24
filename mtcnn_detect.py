@@ -164,7 +164,7 @@ class MTCNNDetect(object):
                 pick = nms(total_boxes.copy(), 0.7, 'Min')
                 total_boxes = total_boxes[pick, :]
                 points = points[:, pick]
-        return rects * self.scale_factor, points * self.scale_factor
+        return total_boxes * self.scale_factor, points * self.scale_factor
 
 
 def layer(op):

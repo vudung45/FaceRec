@@ -164,6 +164,11 @@ class MTCNNDetect(object):
                 pick = nms(total_boxes.copy(), 0.7, 'Min')
                 total_boxes = total_boxes[pick, :]
                 points = points[:, pick]
+        # convert to int before return
+        # multiply conf 100 time to return a int
+        total_boxes[:, 4] = total_boxes[:, 4] * 100
+        total_boxes = np.array((total_boxes), dtype=int)
+        points = np.array((points), dtype=int)
         return total_boxes * self.scale_factor, points * self.scale_factor
 
 

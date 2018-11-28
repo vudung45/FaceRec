@@ -156,7 +156,8 @@ if __name__ == '__main__':
     parser.add_argument("--mode", type=str, help="Run camera recognition", default="camera")
     args = parser.parse_args(sys.argv[1:]);
     FRGraph = FaceRecGraph();
+    MTCNNGraph = FaceRecGraph();
     aligner = AlignCustom();
     extract_feature = FaceFeature(FRGraph)
-    face_detect = MTCNNDetect(FRGraph, scale_factor=2); #scale_factor, rescales image for faster detection
+    face_detect = MTCNNDetect(MTCNNGraph, scale_factor=2); #scale_factor, rescales image for faster detection
     main(args);

@@ -5,10 +5,11 @@ Run the pretrained model to extract 128D face features
 
 import tensorflow as tf
 from architecture import inception_resnet_v1 as resnet
+from tensorflow.python.platform import gfile
 import numpy as np
-
+import os
 class FaceFeature(object):
-    def __init__(self, face_rec_graph, model_path = 'models/model-20170512-110547.ckpt-250000'):
+    def __init__(self, face_rec_graph, model_path = 'models/20170512-110547.pb'):
         '''
 
         :param face_rec_sess: FaceRecSession object
@@ -17,13 +18,14 @@ class FaceFeature(object):
         print("Loading model...")
         with face_rec_graph.graph.as_default():
             self.sess = tf.Session()
-            self.x = tf.placeholder('float', [None,160,160,3]); #default input for the NN is 160x160x3
-            self.embeddings = tf.nn.l2_normalize(
-                                        resnet.inference(self.x, 0.6, phase_train=False)[0], 1, 1e-10); #some magic numbers that u dont have to care about
+            with self.sess.as_default():
+                self.__load_model(model_path)
+                self.images_placeholder = tf.get_default_graph() \
+                                            .get_tensor_by_name("input:0")
+                self.embeddings = tf.get_default_graph() \
+                                    .get_tensor_by_name("embeddings:0")
 
-            saver = tf.train.Saver() #saver load pretrain model
-            saver.restore(self.sess, model_path)
-            print("Model loaded")
+                print("Model loaded")
 
 
     def get_features(self, input_imgs):
@@ -31,6 +33,45 @@ class FaceFeature(object):
         return self.sess.run(self.embeddings, feed_dict = {self.x : images})
 
 
+
+    def __load_model(self, model):
+        # Check if the model is a model directory (containing a metagraph and a checkpoint file)
+        #  or if it is a protobuf file with a frozen graph
+        model_exp = os.path.expanduser(model)
+        if os.path.isfile(model_exp):
+            print('Model filename: %s' % model_exp)
+            with gfile.FastGFile(model_exp, 'rb') as file_:
+                graph_def = tf.GraphDef()
+                graph_def.ParseFromString(file_.read())
+                tf.import_graph_def(graph_def, name='')
+        else:
+            print('Model directory: %s' % model_exp)
+            meta_file, ckpt_file = get_model_filenames(model_exp)
+            print('Metagraph file: %s' % meta_file)
+            print('Checkpoint file: %s' % ckpt_file)
+            saver = tf.train.import_meta_graph(os.path.join(model_exp, meta_file))
+            saver.restore(tf.get_default_session(), os.path.join(model_exp, ckpt_file))
+
+
+def get_model_filenames(model_dir):
+    files = os.listdir(model_dir)
+    meta_files = [s for s in files if s.endswith('.meta')]
+    if len(meta_files) == 0:
+        raise ValueError('No meta file found in the model directory (%s)' % model_dir)
+    elif len(meta_files) > 1:
+        raise ValueError('There should not be more than one meta file \
+                                    in the model directory (%s)' % model_dir)
+    meta_file = meta_files[0]
+    meta_files = [s for s in files if '.ckpt' in s]
+    max_step = -1
+    for file_ in files:
+        step_str = re.match(r'(^model-[\w\- ]+.ckpt-(\d+))', file_)
+        if step_str is not None and len(step_str.groups()) >= 2:
+            step = int(step_str.groups()[1])
+            if step > max_step:
+                max_step = step
+                ckpt_file = step_str.groups()[0]
+    return meta_file, ckpt_file
 
 #some image preprocess stuff
 def prewhiten(x):

@@ -20,17 +20,21 @@ class FaceFeature(object):
             self.sess = tf.Session()
             with self.sess.as_default():
                 self.__load_model(model_path)
-                self.images_placeholder = tf.get_default_graph() \
+                self.x = tf.get_default_graph() \
                                             .get_tensor_by_name("input:0")
                 self.embeddings = tf.get_default_graph() \
                                     .get_tensor_by_name("embeddings:0")
+                self.phase_train_placeholder = tf.get_default_graph() \
+                                                     .get_tensor_by_name("phase_train:0")                    
 
                 print("Model loaded")
 
 
     def get_features(self, input_imgs):
         images = load_data_list(input_imgs,160)
-        return self.sess.run(self.embeddings, feed_dict = {self.x : images})
+        feed_dict = {self.x: images, self.phase_train_placeholder: False}
+
+        return self.sess.run(self.embeddings, feed_dict = feed_dict)
 
 
 
@@ -72,6 +76,15 @@ def get_model_filenames(model_dir):
                 max_step = step
                 ckpt_file = step_str.groups()[0]
     return meta_file, ckpt_file
+
+def tensorization(img):
+    '''
+    Prepare the imgs before input into model
+    :param img: Single face image
+    :return tensor: numpy array in shape(n, 160, 160, 3) ready for input to cnn
+    '''
+    tensor = img.reshape(-1, Config.Align.IMAGE_SIZE, Config.Align.IMAGE_SIZE, 3)
+    return tensor
 
 #some image preprocess stuff
 def prewhiten(x):

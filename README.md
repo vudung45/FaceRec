@@ -8,8 +8,12 @@ A simple working facial recognition program.
     2. Download the pretrained models here: https://drive.google.com/file/d/0Bx4sNrhhaBr3TDRMMUN3aGtHZzg/view?usp=sharing
     
         Then extract those files into models
+        
+    3. In terminal do, source ./venv/bin/activate 
+        
+        then navigate to FaceRec folder location
 
-    3. Run main.py
+    4. Run main.py
 
 ## Requirements:
     Python3 (3.5 ++ is recommended)

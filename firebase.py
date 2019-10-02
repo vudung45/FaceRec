@@ -18,7 +18,7 @@ auth = firebase.auth()
 
 
 email = "robertcook.rdc@gmail.com"
-password = "General2012"
+password = ""
 
 #auth.create_user_with_email_and_password(email, password)
 
